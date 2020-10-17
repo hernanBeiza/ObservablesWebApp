@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h2>Ejemplo de carga usando Observables</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<code>Ejemplo 1: Uno en uno (Mira la consola) </code>
+			<div class="progress" *ngIf="flagCargando">
+			  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"></div>
+			</div>
+			<p *ngFor="let tipo of tipos">{{tipo.id}} - {{tipo.name}}</p>
+		</div>
+		<div class="col">
+			<code>Ejemplo 2: Esperar la respuesta completa de todos</code>
+			<div class="progress" *ngIf="flagCargandoTodosDeUna">
+			  <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"></div>
+			</div>
+			<p *ngFor="let tipo of todosDeUna">{{tipo.id}} - {{tipo.name}}</p>
+		</div>
+	</div>
+</div>
