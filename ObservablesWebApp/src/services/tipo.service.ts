@@ -156,9 +156,21 @@ export class TipoService {
 
   public obtenerConID(id:number): Observable<Tipo> {
     console.log("obtenerConID();",id);
-    return this.httpClient.get<Tipo>(this.url+id,this.httpOptions).pipe(map(item=>{
+    return this.httpClient.get<Tipo>(this.url+id,this.httpOptions).pipe(
+      //tap(data => console.log(data)),
+      map(data=>{
       console.log("obtenerConID(); ok",id);
-      return new Tipo(item);
+      let tipo = new Tipo(data);
+      let pokemones:Array<Pokemon> = new Array<Pokemon>();
+      for(let item of data.pokemon){
+        let pokemon = new Pokemon(item);
+        //let urls = pokemon.url.split("/");
+        //let id:number = Number(urls[urls.length-2]);
+        //pokemon.id = id;
+        pokemones.push(pokemon);
+      }
+      tipo.pokemones = pokemones;
+      return tipo;
     })).pipe(catchError(error=>{
       console.error(error);
       //Manejar el error dentro de este Observable para que llegue la llamada completa al componente
